@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Лунь Юй | 论语 | Confucian Analects</title>
+  <meta name="description" content="多语言版《论语》交互式学习工具">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- Шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Assistant&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Assistant', sans-serif;
+      background: #fdfdfb;
+      color: #222;
+      line-height: 1.6;
+      margin: 1em;
+      padding-top: 15px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5em;
+      color: #333;
+    }
+
+    .chinese {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 1.8em;
+      margin-bottom: 0.3em;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .pinyin {
+      font-style: italic;
+      margin-bottom: 0.4em;
+      color: #4d77aa;
+      text-align: center;
+    }
+
+    .translation {
+      margin-bottom: 0.4em;
+      text-align: center;
+    }
+
+    /* Система перевода */
+    .translation-ru { display: block; }
+    .translation-en { display: none; }
+    .translation-zh { display: none; }
+
+    body.lang-en .translation-ru { display: none; }
+    body.lang-en .translation-en { display: block; }
+    body.lang-en .translation-zh { display: none; }
+
+    body.lang-zh .translation-ru { display: none; }
+    body.lang-zh .translation-en { display: none; }
+    body.lang-zh .translation-zh { display: block; }
+
+    .verse {
+      padding: 1.2em 0;
+      border-bottom: 1px solid #eee;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .word {
+      position: relative;
+      cursor: help;
+      white-space: nowrap;
+    }
+
+    .syntax {
+      background: #eef3ff;
+      padding: 0.6em 1em;
+      border-left: 4px solid #4d77aa;
+      margin: 0.8em auto 0;
+      font-size: 0.95em;
+      max-width: 600px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    #interface-bar {
+      position: sticky;
+      top: 0;
+      background: rgba(253, 253, 251, 0.9);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      padding: 0.8em 1em;
+      border-bottom: 1px solid #ddd;
+      font-size: 0.95em;
+      margin-bottom: 1em;
+    }
+
+    #info-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(244, 244, 244, 0.95);
+      color: #000;
+      padding: 0.6em 1em;
+      border-top: 1px solid #ccc;
+      font-size: 0.9em;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        margin: 0.5em;
+        padding-top: 70px;
+      }
+      #interface-bar {
+        gap: 0.8em;
+        padding: 0.6em;
+      }
+      .chinese {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body class="lang-ru">
+  <h1>论语 | Лунь Юй | Analects</h1>
+
+  <div id="interface-bar">
+    <label style="white-space: nowrap;">
+      <input type="checkbox" id="toggle-list-mode" />
+      📖 <span id="morph-label">Морфология</span>
+    </label>
+    
+    <label for="translation-select" style="white-space: nowrap;">
+      🌐 <span id="lang-label">Язык:</span>
+      <select id="translation-select">
+        <option value="ru" selected>Русский</option>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="content">
+    <!-- Цитата 1 -->
+    <div class="verse" data-audio="audio/verse1.mp3">
+      <p class="chinese">
+        <span class="word" data-info-ru="学 (xué): учиться" data-info-en="学 (xué): to learn" data-info-zh="学 (xué): 学习">学</span>
+        <span class="word" data-info-ru="而 (ér): и" data-info-en="而 (ér): and" data-info-zh="而 (ér): 和">而</span>
+        <span class="word" data-info-ru="时 (shí): постоянно" data-info-en="时 (shí): constantly" data-info-zh="时 (shí): 经常">时</span>
+        <span class="word" data-info-ru="习 (xí): повторять" data-info-en="习 (xí): to practice" data-info-zh="习 (xí): 练习">习</span>
+        <span class="word" data-info-ru="之 (zhī): это" data-info-en="之 (zhī): it" data-info-zh="之 (zhī): 它">之</span>，
+        <span class="word" data-info-ru="不 (bù): не" data-info-en="不 (bù): not" data-info-zh="不 (bù): 不">不</span>
+        <span class="word" data-info-ru="亦 (yì): разве" data-info-en="亦 (yì): indeed" data-info-zh="亦 (yì): 也">亦</span>
+        <span class="word" data-info-ru="说 (yuè): радость" data-info-en="说 (yuè): joy" data-info-zh="说 (yuè): 快乐">说</span>
+        <span class="word" data-info-ru="乎 (hū): (вопрос)" data-info-en="乎 (hū): (question)" data-info-zh="乎 (hū): （疑问）">乎</span>？
+      </p>
+      <p class="pinyin">
+        Xué ér shí xí zhī, bù yì yuè hū?
+      </p>
+      <p class="translation translation-ru">
+        "Учиться и постоянно повторять — разве это не радость?"
+      </p>
+      <p class="translation translation-en">
+        "Is it not a joy to learn and practice constantly?"
+      </p>
+      <p class="translation translation-zh">
+        “学而时习之，不亦说乎？”（不断学习并实践，不是很愉快吗？）
+      </p>
+      <div class="syntax">
+        🧠 <strong class="syntax-title">Синтаксис:</strong>
+        <span class="syntax-ru">Риторический вопрос с глагольной цепочкой</span>
+        <span class="syntax-en">Rhetorical question with verb chain</span>
+        <span class="syntax-zh">反问句式与动词连用</span>
+      </div>
+    </div>
+
+    <!-- Цитата 2 -->
+    <div class="verse" data-audio="audio/verse2.mp3">
+      <p class="chinese">
+        <span class="word" data-info-ru="有 (yǒu): иметь" data-info-en="有 (yǒu): to have" data-info-zh="有 (yǒu): 有">有</span>
+        <span class="word" data-info-ru="朋 (péng): друг" data-info-en="朋 (péng): friend" data-info-zh="朋 (péng): 朋友">朋</span>
+        <span class="word" data-info-ru="自 (zì): из" data-info-en="自 (zì): from" data-info-zh="自 (zì): 从">自</span>
+        <span class="word" data-info-ru="远方 (yuǎnfāng): далеко" data-info-en="远方 (yuǎnfāng): afar" data-info-zh="远方 (yuǎnfāng): 远方">远方</span>
+        <span class="word" data-info-ru="来 (lái): приходить" data-info-en="来 (lái): to come" data-info-zh="来 (lái): 来">来</span>，
+        <span class="word" data-info-ru="不 (bù): не" data-info-en="不 (bù): not" data-info-zh="不 (bù): 不">不</span>
+        <span class="word" data-info-ru="亦 (yì): разве" data-info-en="亦 (yì): indeed" data-info-zh="亦 (yì): 也">亦</span>
+        <span class="word" data-info-ru="乐 (lè): удовольствие" data-info-en="乐 (lè): pleasure" data-info-zh="乐 (lè): 快乐">乐</span>
+        <span class="word" data-info-ru="乎 (hū): (вопрос)" data-info-en="乎 (hū): (question)" data-info-zh="乎 (hū): （疑问）">乎</span>？
+      </p>
+      <p class="pinyin">
+        Yǒu péng zì yuǎnfāng lái, bù yì lè hū?
+      </p>
+      <p class="translation translation-ru">
+        "Когда друзья приходят издалека — разве это не удовольствие?"
+      </p>
+      <p class="translation translation-en">
+        "When friends come from afar — is this not delightful?"
+      </p>
+      <p class="translation translation-zh">
+        “有朋自远方来，不亦乐乎？”（有朋友从远方来，不是很高兴吗？）
+      </p>
+      <div class="syntax">
+        🧠 <strong class="syntax-title">Синтаксис:</strong>
+        <span class="syntax-ru">Временная конструкция с риторическим вопросом</span>
+        <span class="syntax-en">Temporal construction with rhetorical question</span>
+        <span class="syntax-zh">时间结构与反问句</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="info-bar"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Элементы управления
+      const listModeToggle = document.getElementById('toggle-list-mode');
+      const translationSelect = document.getElementById('translation-select');
+      const infoBar = document.getElementById('info-bar');
+      
+      // Локализация интерфейса
+      const labels = {
+        ru: { morph: 'Морфология', lang: 'Язык:' },
+        en: { morph: 'Morphology', lang: 'Language:' },
+        zh: { morph: '词法', lang: '语言:' }
+      };
+
+      // Восстановление настроек
+      if (localStorage.getItem('morphMode') === 'list') {
+        listModeToggle.checked = true;
+      }
+      const savedLang = localStorage.getItem('translationLang') || 'ru';
+      translationSelect.value = savedLang;
+      updateLanguage(savedLang);
+
+      // Обработчики событий
+      listModeToggle.addEventListener('change', toggleMorphologyMode);
+      translationSelect.addEventListener('change', changeLanguage);
+      
+      // Инициализация
+      updateMorphologyDisplay();
+      setupWordTooltips();
+      setupAudio();
+
+      // Функции
+      function toggleMorphologyMode() {
+        localStorage.setItem('morphMode', listModeToggle.checked ? 'list' : 'tooltip');
+        updateMorphologyDisplay();
+      }
+
+      function changeLanguage() {
+        const lang = translationSelect.value;
+        localStorage.setItem('translationLang', lang);
+        updateLanguage(lang);
+        updateMorphologyDisplay();
+      }
+
+      function updateLanguage(lang) {
+        document.body.className = `lang-${lang}`;
+        document.getElementById('morph-label').textContent = labels[lang].morph;
+        document.getElementById('lang-label').textContent = labels[lang].lang;
+        
+        // Обновляем синтаксис
+        document.querySelectorAll('.syntax-title').forEach(el => {
+          el.textContent = lang === 'ru' ? 'Синтаксис:' : 
+                          lang === 'en' ? 'Syntax:' : '语法:';
+        });
+      }
+
+      function updateMorphologyDisplay() {
+        const isListMode = listModeToggle.checked;
+        const currentLang = translationSelect.value;
+        
+        document.querySelectorAll('.verse').forEach(verse => {
+          // Удаляем старый список
+          const oldList = verse.querySelector('.morph-list');
+          if (oldList) oldList.remove();
+
+          // Создаём новый список в режиме списка
+          if (isListMode) {
+            const words = verse.querySelectorAll('.word');
+            let listHTML = '<ul class="morph-list" style="margin:0.5em auto 0;padding-left:1.5em;max-width:600px;font-size:0.9em;">';
+            
+            words.forEach(word => {
+              const info = word.getAttribute(`data-info-${currentLang}`) || '';
+              listHTML += `<li>${word.textContent}: ${info}</li>`;
+            });
+            
+            listHTML += '</ul>';
+            verse.insertAdjacentHTML('beforeend', listHTML);
+          }
+        });
+      }
+
+      function setupWordTooltips() {
+        document.querySelectorAll('.word').forEach(word => {
+          word.onclick = (e) => {
+            if (!listModeToggle.checked) {
+              e.preventDefault();
+              const currentLang = translationSelect.value;
+              const info = word.getAttribute(`data-info-${currentLang}`) || '';
+              
+              infoBar.textContent = info;
+              infoBar.style.display = 'block';
+              
+              clearTimeout(infoBar._hideTimer);
+              infoBar._hideTimer = setTimeout(() => {
+                infoBar.style.display = 'none';
+              }, 3000);
+            }
+          };
+        });
+      }
+
+      function setupAudio() {
+        document.querySelectorAll('.verse').forEach(verse => {
+          verse.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('word')) {
+              const audioSrc = verse.getAttribute('data-audio');
+              if (audioSrc) new Audio(audioSrc).play();
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
