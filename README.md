@@ -60,4 +60,4 @@ To be confirmed. Likely [Creative Commons Attribution-ShareAlike 4.0](https://cr
 Monk Panteleimon  
 (Leon Adzhindzhal, Cetinje Monastery, Montenegro)  
 📧 leon7a@gmail.com  
-📱 WhatsApp: +38269880057
+📱 WhatsApp: +38268903248
